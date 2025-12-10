@@ -30,7 +30,7 @@ function initTileOrder() {
       var imgValue = order[idx];
 
       var item = document.createElement("li");
-      item.className = "tile-order-chip";
+      item.className = "tile-order-chip tile-color-" + value;
 
       var img = document.createElement("img");
       img.src = "images/tiles/" + imgValue + ".png";

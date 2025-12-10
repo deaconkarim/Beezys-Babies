@@ -348,49 +348,41 @@ hr {
   $exponent: 1;
   $limit: 11;
 
-  // Colors for all 11 states, false = no special color
-  $special-colors: false false, // 2
-                   false false, // 4
-                   #66bb6a true, // 8
-                   #4caf50 true, // 16
-                   #43a047 true, // 32
-                   #388e3c true, // 64
-                   false true, // 128
-                   false true, // 256
-                   false true, // 512
-                   false true, // 1024
-                   false true; // 2048
+  // Specific colors per value (value: (background, bright-text?))
+  $value-colors: (
+    2: (#f7f2eb, false),
+    4: (#e9e1ff, false),
+    8: (#ffd27f, true),
+    16: (#ffb347, true),
+    32: (#ff8c42, true),
+    64: (#ff5f5f, true),
+    128: (#66d6d1, true),
+    256: (#4db5ff, true),
+    512: (#5c7cfa, true),
+    1024: (#9b6bff, true),
+    2048: (#f5c400, true)
+  );
 
   // Build tile colors
   @while $exponent <= $limit {
     $power: pow($base, $exponent);
 
     &.tile-#{$power} .tile-inner {
-      // Calculate base background color
-      $gold-percent: ($exponent - 1) / ($limit - 1) * 100;
-      $mixed-background: mix($tile-gold-color, $tile-color, $gold-percent);
+      $pair: map-get($value-colors, $power);
+      $bg: nth($pair, 1);
+      $bright: nth($pair, 2);
 
-      $nth-color: nth($special-colors, $exponent);
-
-      $special-background: nth($nth-color, 1);
-      $bright-color: nth($nth-color, 2);
-
-      @if $special-background {
-        $mixed-background: mix($special-background, $mixed-background, 55%);
-      }
-
-      @if $bright-color {
+      background: $bg;
+      @if $bright {
         color: $bright-text-color;
+      } @else {
+        color: $text-color;
       }
 
-      // Set background
-      background: $mixed-background;
-
-      // Add glow
+      // Subtle glow for higher tiles
       $glow-opacity: max($exponent - 4, 0) / ($limit - 4);
-
-      @if not $special-background {
-        box-shadow: 0 0 30px 10px rgba($tile-gold-glow-color, $glow-opacity / 1.8),
+      @if $glow-opacity > 0 {
+        box-shadow: 0 0 18px 6px rgba($tile-gold-glow-color, $glow-opacity / 2.2),
                     inset 0 0 0 1px rgba(white, $glow-opacity / 3);
       }
 
@@ -539,9 +531,9 @@ hr {
     gap: 6px;
     padding: 6px 10px;
     border-radius: 4px;
-    background: $game-container-background;
-    color: $bright-text-color;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    background: #f7f2eb;
+    color: $text-color;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 
     img {
       width: 28px;
@@ -549,6 +541,18 @@ hr {
       object-fit: contain;
       display: block;
     }
+
+    &.tile-color-2 { background: #f7f2eb; color: $text-color; }
+    &.tile-color-4 { background: #e9e1ff; color: $text-color; }
+    &.tile-color-8 { background: #ffd27f; color: $text-color; }
+    &.tile-color-16 { background: #ffb347; color: $bright-text-color; }
+    &.tile-color-32 { background: #ff8c42; color: $bright-text-color; }
+    &.tile-color-64 { background: #ff5f5f; color: $bright-text-color; }
+    &.tile-color-128 { background: #66d6d1; color: $bright-text-color; }
+    &.tile-color-256 { background: #4db5ff; color: $bright-text-color; }
+    &.tile-color-512 { background: #5c7cfa; color: $bright-text-color; }
+    &.tile-color-1024 { background: #9b6bff; color: $bright-text-color; }
+    &.tile-color-2048 { background: #f5c400; color: $bright-text-color; }
   }
 }
 

@@ -324,7 +324,7 @@ hr {
   transition-property: transform; }
   .tile .tile-inner {
     border-radius: 3px;
-    background: #c8e6c9;
+    background: #f7f2eb;
     text-align: center;
     font-weight: bold;
     z-index: 10;
@@ -339,59 +339,59 @@ hr {
     height: auto;
     object-fit: contain; }
   .tile.tile-2 .tile-inner {
-    background: #c8e6c9;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
+    background: #f7f2eb;
+    color: #2d5016; }
   .tile.tile-4 .tile-inner {
-    background: #a5d6a7;
-    box-shadow: 0 0 30px 10px rgba(243, 215, 116, 0), inset 0 0 0 1px rgba(255, 255, 255, 0); }
+    background: #e9e1ff;
+    color: #2d5016; }
   .tile.tile-8 .tile-inner {
     color: #f0f9f4;
-    background: #66bb6a; }
+    background: #ffd27f; }
   .tile.tile-16 .tile-inner {
     color: #f0f9f4;
-    background: #4caf50; }
+    background: #ffb347; }
   .tile.tile-32 .tile-inner {
     color: #f0f9f4;
-    background: #43a047; }
+    background: #ff8c42; }
   .tile.tile-64 .tile-inner {
     color: #f0f9f4;
-    background: #388e3c; }
+    background: #ff5f5f; }
   .tile.tile-128 .tile-inner {
     color: #f0f9f4;
-    background: #4caf50;
-    box-shadow: 0 0 30px 10px rgba(129, 199, 132, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
+    background: #66d6d1;
+    box-shadow: 0 0 18px 6px rgba(129, 199, 132, 0.2381), inset 0 0 0 1px rgba(255, 255, 255, 0.14286);
     font-size: 45px; }
     @media screen and (max-width: 520px) {
       .tile.tile-128 .tile-inner {
         font-size: 25px; } }
   .tile.tile-256 .tile-inner {
     color: #f0f9f4;
-    background: #4caf50;
-    box-shadow: 0 0 30px 10px rgba(129, 199, 132, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
+    background: #4db5ff;
+    box-shadow: 0 0 18px 6px rgba(129, 199, 132, 0.31746), inset 0 0 0 1px rgba(255, 255, 255, 0.19048);
     font-size: 45px; }
     @media screen and (max-width: 520px) {
       .tile.tile-256 .tile-inner {
         font-size: 25px; } }
   .tile.tile-512 .tile-inner {
     color: #f0f9f4;
-    background: #4caf50;
-    box-shadow: 0 0 30px 10px rgba(129, 199, 132, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
+    background: #5c7cfa;
+    box-shadow: 0 0 18px 6px rgba(129, 199, 132, 0.39683), inset 0 0 0 1px rgba(255, 255, 255, 0.2381);
     font-size: 45px; }
     @media screen and (max-width: 520px) {
       .tile.tile-512 .tile-inner {
         font-size: 25px; } }
   .tile.tile-1024 .tile-inner {
     color: #f0f9f4;
-    background: #4caf50;
-    box-shadow: 0 0 30px 10px rgba(129, 199, 132, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
+    background: #9b6bff;
+    box-shadow: 0 0 18px 6px rgba(129, 199, 132, 0.47619), inset 0 0 0 1px rgba(255, 255, 255, 0.28571);
     font-size: 35px; }
     @media screen and (max-width: 520px) {
       .tile.tile-1024 .tile-inner {
         font-size: 15px; } }
   .tile.tile-2048 .tile-inner {
     color: #f0f9f4;
-    background: #4caf50;
-    box-shadow: 0 0 30px 10px rgba(129, 199, 132, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
+    background: #f5c400;
+    box-shadow: 0 0 18px 6px rgba(129, 199, 132, 0.55556), inset 0 0 0 1px rgba(255, 255, 255, 0.33333);
     font-size: 35px; }
     @media screen and (max-width: 520px) {
       .tile.tile-2048 .tile-inner {
@@ -588,14 +588,47 @@ hr {
     gap: 6px;
     padding: 6px 10px;
     border-radius: 4px;
-    background: #81c784;
-    color: #f0f9f4;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35); }
+    background: #f7f2eb;
+    color: #2d5016;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25); }
     .tile-order-card .tile-order-chip img {
       width: 28px;
       height: 28px;
       object-fit: contain;
       display: block; }
+    .tile-order-card .tile-order-chip.tile-color-2 {
+      background: #f7f2eb;
+      color: #2d5016; }
+    .tile-order-card .tile-order-chip.tile-color-4 {
+      background: #e9e1ff;
+      color: #2d5016; }
+    .tile-order-card .tile-order-chip.tile-color-8 {
+      background: #ffd27f;
+      color: #2d5016; }
+    .tile-order-card .tile-order-chip.tile-color-16 {
+      background: #ffb347;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-32 {
+      background: #ff8c42;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-64 {
+      background: #ff5f5f;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-128 {
+      background: #66d6d1;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-256 {
+      background: #4db5ff;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-512 {
+      background: #5c7cfa;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-1024 {
+      background: #9b6bff;
+      color: #f0f9f4; }
+    .tile-order-card .tile-order-chip.tile-color-2048 {
+      background: #f5c400;
+      color: #f0f9f4; }
 
 .install-banner {
   position: fixed;
