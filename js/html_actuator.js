@@ -15,6 +15,7 @@ function HTMLActuator() {
   this.lastEmptyCells   = null;
   this.lastMaxTile      = 0;
   this.firstMergeDone   = false;
+  this.earlyBurst       = 0;
   this.introText        = (document.querySelector(".game-intro") && document.querySelector(".game-intro").textContent.trim()) || "Join the babies!";
 
   // Set initial face/text
@@ -202,6 +203,7 @@ HTMLActuator.prototype.updateReaction = function (maxTile, emptyCells, scoreDelt
   // Mark first merge
   if (scoreDelta > 0) {
     this.firstMergeDone = true;
+    this.earlyBurst = Math.max(this.earlyBurst, 3); // ensure several early reactions
   }
 
   if (metadata.over) {
@@ -229,6 +231,14 @@ HTMLActuator.prototype.updateReaction = function (maxTile, emptyCells, scoreDelt
     faceKey = "cool";
     text = "On a roll!";
   } else if (scoreDelta > 0) {
+    // Early-game richer rotation
+    var earlyPhrases = [
+      { face: "smile", text: "Beezy likes that!" },
+      { face: "cool", text: "Fresh start!" },
+      { face: "star", text: "Bright spark!" },
+      { face: "party", text: "Tiny celebration!" },
+      { face: "tight", text: "Keep space open." }
+    ];
     var phrases = [
       { face: "smile", text: "Smooth slide!" },
       { face: "cool", text: "Keep that flow." },
@@ -236,10 +246,13 @@ HTMLActuator.prototype.updateReaction = function (maxTile, emptyCells, scoreDelt
       { face: "tight", text: "Watch your space." },
       { face: "party", text: "Little win!" }
     ];
-    if (Math.random() < 0.35) {
-      var pick = phrases[Math.floor(Math.random() * phrases.length)];
+    var pool = (this.earlyBurst > 0 ? earlyPhrases : phrases);
+    var chance = (this.earlyBurst > 0 ? 0.9 : 0.35);
+    if (Math.random() < chance) {
+      var pick = pool[Math.floor(Math.random() * pool.length)];
       faceKey = pick.face;
       text = pick.text;
+      if (this.earlyBurst > 0) this.earlyBurst -= 1;
     } else {
       return; // keep current reaction to avoid spamming
     }
