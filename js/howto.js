@@ -5,6 +5,7 @@
 
   var startBtn = document.getElementById("howto-start");
   var skipBtn = document.getElementById("howto-skip");
+  var triggerBtn = document.querySelector(".howto-trigger");
   var STORAGE_KEY = "beezy_howto_dismissed";
 
   function hide() {
@@ -22,6 +23,9 @@
 
   if (startBtn) startBtn.addEventListener("click", hide);
   if (skipBtn) skipBtn.addEventListener("click", hide);
+  if (triggerBtn) triggerBtn.addEventListener("click", function () {
+    show();
+  });
 
   var alreadyDismissed = false;
   try {

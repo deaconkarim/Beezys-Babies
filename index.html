@@ -18,60 +18,132 @@
   <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 <body>
-  <div class="container">
-    <div class="heading">
-      <h1 class="title">Beezy's Babies</h1>
-      <div class="scores-container">
-        <div class="score-container">0</div>
-        <div class="best-container">0</div>
-      </div>
-    </div>
-
-    <div class="above-game">
-      <p class="game-intro">Join the babies to make <strong>Beezy Happy!</strong></p>
-      <a class="restart-button">New Game</a>
-    </div>
-
-    <div class="game-container">
-      <div class="game-message">
-        <p></p>
-        <div class="lower">
-	        <a class="keep-playing-button">Keep going</a>
-          <a class="retry-button">Try again</a>
+  <div class="app-shell">
+    <header class="app-header" role="banner">
+      <div class="status-bar" aria-hidden="true">
+        <span class="status-bar__time">12:45</span>
+        <div class="status-bar__icons">
+          <span class="status-bar__icon status-bar__icon--signal"></span>
+          <span class="status-bar__icon status-bar__icon--wifi"></span>
+          <span class="status-bar__icon status-bar__icon--battery"></span>
         </div>
       </div>
 
-      <div class="grid-container">
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
+      <div class="hero">
+        <div class="hero__text">
+          <p class="eyebrow">Story episode · 02</p>
+          <h1 class="title">Beezy's Babies</h1>
+          <p class="subtitle">Swipe to build Beezy a cozy nursery. Every merge levels up the crew.</p>
         </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
+        <button class="pill-button pill-button--ghost howto-trigger" type="button" aria-haspopup="dialog" aria-controls="howto-title">
+          Guide
+        </button>
+      </div>
+
+      <div class="score-board scores-container" role="region" aria-label="Scoreboard">
+        <article class="score-card">
+          <p class="score-card__label">Current score</p>
+          <div class="score-container">0</div>
+          <p class="score-card__hint">Live run</p>
+        </article>
+        <article class="score-card">
+          <p class="score-card__label">Personal best</p>
+          <div class="best-container">0</div>
+          <p class="score-card__hint">All time</p>
+        </article>
+        <a class="restart-button pill-button" role="button">New run</a>
+      </div>
+    </header>
+
+    <section class="game-section">
+      <div class="game-device">
+        <div class="game-meta">
+          <p class="game-intro">Daily vibe · <strong>Join the babies to make Beezy happy.</strong></p>
+          <div class="game-pills">
+            <span class="game-pill">Goal · 4096</span>
+            <span class="game-pill">Streak · 5 days</span>
+          </div>
         </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-        </div>
-        <div class="grid-row">
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
-          <div class="grid-cell"></div>
+
+        <div class="game-surface">
+          <div class="game-container">
+            <div class="game-message">
+              <p></p>
+              <div class="lower">
+                <a class="keep-playing-button">Keep going</a>
+                <a class="retry-button">Try again</a>
+              </div>
+            </div>
+
+            <div class="grid-container">
+              <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+              </div>
+              <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+              </div>
+              <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+              </div>
+              <div class="grid-row">
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell"></div>
+              </div>
+            </div>
+
+            <div class="tile-container"></div>
+          </div>
         </div>
       </div>
 
-      <div class="tile-container">
+      <aside class="session-panel" aria-label="Session summary">
+        <div class="session-card">
+          <p class="session-card__title">Session goals</p>
+          <ul class="session-card__list">
+            <li>Keep the board breathing with early corners.</li>
+            <li>Trigger Beezy's smile by reaching tile 512+.</li>
+            <li>Use Keep Going once the nursery unlocks.</li>
+          </ul>
+        </div>
+        <div class="session-actions">
+          <button class="pill-button pill-button--ghost" type="button">Share board</button>
+          <button class="pill-button" type="button">Save replay</button>
+        </div>
+      </aside>
+    </section>
 
-      </div>
-    </div>
+    <section class="details-section">
+      <details class="tile-order-card">
+        <summary>Tile order (low to high)</summary>
+        <div class="tile-order-body">
+          <p class="tile-order-description">
+            View the sequence of tiles from the starting baby up to the biggest merge. Shuffle to get a random lineup.
+          </p>
+          <div class="tile-order-actions">
+            <button id="tile-order-shuffle" type="button">Shuffle order</button>
+            <button id="tile-order-restore" type="button">Restore order</button>
+            <span id="tile-order-label" class="tile-order-label"></span>
+          </div>
+          <ul id="tile-order-list" class="tile-order-list" aria-live="polite"></ul>
+        </div>
+      </details>
+
+      <p class="game-explanation">
+        <strong class="important">How to play:</strong> Swipe anywhere on the board. Matching babies merge into the next face. Hit 2048 to unlock Beezy's happy dance, then decide if you keep going.
+      </p>
+    </section>
+  </div>
 
   <div class="howto-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="howto-title">
     <div class="howto-card">
@@ -83,31 +155,9 @@
       </ol>
       <div class="howto-actions">
         <button class="howto-primary" id="howto-start">Got it</button>
+        <button class="howto-secondary" id="howto-skip">Maybe later</button>
       </div>
     </div>
-  </div>
-
-    <details class="tile-order-card">
-      <summary>Tile order (low to high)</summary>
-      <div class="tile-order-body">
-        <p class="tile-order-description">
-          View the sequence of tiles from the starting baby up to the biggest merge. Shuffle to see a random order.
-        </p>
-        <div class="tile-order-actions">
-          <button id="tile-order-shuffle" type="button">Shuffle order</button>
-          <button id="tile-order-restore" type="button">Restore order</button>
-          <span id="tile-order-label" class="tile-order-label"></span>
-        </div>
-        <ul id="tile-order-list" class="tile-order-list" aria-live="polite"></ul>
-      </div>
-    </details>
-
-    <p class="game-explanation">
-      <strong class="important">How to play:</strong> Swipe to move the tiles. When two babies with the same face touch, they <strong>merge into the next baby!</strong>
-    </p>
-    <hr>
-    <p>
-    </p>
   </div>
 
   <script src="js/bind_polyfill.js"></script>
