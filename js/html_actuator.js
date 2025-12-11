@@ -15,7 +15,7 @@ function HTMLActuator() {
   this.lastEmptyCells   = null;
   this.lastMaxTile      = 0;
   this.firstMergeDone   = false;
-  this.introText        = (document.querySelector(".game-intro") && document.querySelector(".game-intro").textContent.trim()) || "Join the babies to make Beezy Happy!";
+  this.introText        = (document.querySelector(".game-intro") && document.querySelector(".game-intro").textContent.trim()) || "Join the babies!";
 
   // Set initial face/text
   if (this.reactionFace) this.setReactionFace("smile");
