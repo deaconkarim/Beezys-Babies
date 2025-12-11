@@ -452,7 +452,10 @@ hr {
   animation: appear 200ms ease 100ms;
   -webkit-animation-fill-mode: backwards;
   -moz-animation-fill-mode: backwards;
-  animation-fill-mode: backwards; }
+  animation-fill-mode: backwards;
+  -webkit-animation: appear 200ms ease 100ms, celebrate 420ms ease-out;
+  -moz-animation: appear 200ms ease 100ms, celebrate 420ms ease-out;
+  animation: appear 200ms ease 100ms, celebrate 420ms ease-out; }
 
 @-webkit-keyframes pop {
   0% {
@@ -468,6 +471,50 @@ hr {
     transform: scale(1.2); }
 
   100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1); } }
+
+@-webkit-keyframes celebrate {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.55), 0 0 0 0 rgba(255, 255, 255, 0);
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9); }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0), 0 0 24px 8px rgba(255, 255, 255, 0.18);
+    -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    transform: scale(1.08); }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0), 0 0 0 0 rgba(255, 255, 255, 0);
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes celebrate {
+  0% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.55), 0 0 0 0 rgba(255, 255, 255, 0);
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    -ms-transform: scale(0.9);
+    transform: scale(0.9); }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(76, 175, 80, 0), 0 0 24px 8px rgba(255, 255, 255, 0.18);
+    -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+    -ms-transform: scale(1.08);
+    transform: scale(1.08); }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0), 0 0 0 0 rgba(255, 255, 255, 0);
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
     -ms-transform: scale(1);
@@ -988,3 +1035,60 @@ body.howto-open {
     margin-top: 90px !important; }
   .game-message .lower {
     margin-top: 30px !important; } }
+
+/* Merge celebration popup */
+.merge-toast {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease;
+}
+.merge-toast.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.merge-toast.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.merge-toast__card {
+  background: rgba(8, 14, 26, 0.95);
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 22px 20px;
+  min-width: 260px;
+  max-width: 90vw;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.5);
+  transform: scale(0.94);
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+.merge-toast.visible .merge-toast__card {
+  transform: scale(1);
+  opacity: 1;
+}
+.merge-toast__img {
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 6px;
+  object-fit: contain;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+.merge-toast__text {
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.01em;
+  color: #e8f1ff;
+  line-height: 1.35;
+}

@@ -3,6 +3,8 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.mergeToast       = this.ensureMergeToast();
+  this.seenMergeValues  = this.loadSeenMergeValues();
 
   this.score = 0;
 }
@@ -96,6 +98,9 @@ HTMLActuator.prototype.addTile = function (tile) {
     tile.mergedFrom.forEach(function (merged) {
       self.addTile(merged);
     });
+
+    // Show celebration for the resulting merged tile (first time per value)
+    this.showMergeToast(tile.value, imgValue);
   } else {
     classes.push("tile-new");
     this.applyClasses(wrapper, classes);
@@ -106,6 +111,102 @@ HTMLActuator.prototype.addTile = function (tile) {
 
   // Put the tile on the board
   this.tileContainer.appendChild(wrapper);
+};
+
+HTMLActuator.prototype.loadSeenMergeValues = function () {
+  try {
+    var raw = window.localStorage.getItem("mergeSeenTiles");
+    if (!raw) return new Set();
+    var parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) return new Set(parsed);
+  } catch (e) {}
+  return new Set();
+};
+
+HTMLActuator.prototype.saveSeenMergeValues = function () {
+  try {
+    window.localStorage.setItem("mergeSeenTiles", JSON.stringify(Array.from(this.seenMergeValues)));
+  } catch (e) {}
+};
+
+HTMLActuator.prototype.resetMergeSeenTiles = function () {
+  this.seenMergeValues = new Set();
+  try {
+    window.localStorage.removeItem("mergeSeenTiles");
+  } catch (e) {}
+};
+
+HTMLActuator.prototype.ensureMergeToast = function () {
+  var existing = document.querySelector(".merge-toast");
+  if (existing) return {
+    root: existing,
+    card: existing.querySelector(".merge-toast__card"),
+    img: existing.querySelector(".merge-toast__img"),
+    text: existing.querySelector(".merge-toast__text")
+  };
+
+  var root = document.createElement("div");
+  root.className = "merge-toast hidden";
+
+  var card = document.createElement("div");
+  card.className = "merge-toast__card";
+
+  var img = document.createElement("img");
+  img.className = "merge-toast__img";
+  img.alt = "";
+
+  var text = document.createElement("div");
+  text.className = "merge-toast__text";
+
+  card.appendChild(img);
+  card.appendChild(text);
+  root.appendChild(card);
+  document.body.appendChild(root);
+
+  return { root: root, card: card, img: img, text: text };
+};
+
+HTMLActuator.prototype.showMergeToast = function (value, imgValue) {
+  if (!this.mergeToast) return;
+
+  // Only show once per tile value
+  if (this.seenMergeValues.has(value)) return;
+  this.seenMergeValues.add(value);
+  this.saveSeenMergeValues();
+
+  // Name tiles by the image key first (so shuffles / remaps still show the right name)
+  var defaultNames = {
+    2: "Enmebaragesi",
+    4: "Titan",
+    8: "Sniper",
+    16: "Cali",
+    32: "Axel",
+    64: "Diesel",
+    128: "Jaxson",
+    256: "Adrianna",
+    512: "Ty",
+    1024: "Joey",
+    2048: "BG",
+    4096: "A Happy Beezy!"
+  };
+
+  var nameMap = (window.tileNames) || defaultNames;
+  var nameKey = imgValue; // prioritize the image mapping key
+  var label = nameMap[nameKey] || nameMap[value] || ("Tile " + value);
+
+  this.mergeToast.img.src = "images/tiles/" + imgValue + ".png";
+  this.mergeToast.img.alt = label;
+  this.mergeToast.text.textContent = "You created: " + label;
+
+  this.mergeToast.root.classList.remove("hidden");
+  this.mergeToast.root.classList.add("visible");
+
+  clearTimeout(this.mergeToast.hideTimer);
+  var self = this;
+  this.mergeToast.hideTimer = setTimeout(function () {
+    self.mergeToast.root.classList.remove("visible");
+    self.mergeToast.root.classList.add("hidden");
+  }, 1500);
 };
 
 HTMLActuator.prototype.applyClasses = function (element, classes) {
