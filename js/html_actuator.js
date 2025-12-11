@@ -114,26 +114,16 @@ HTMLActuator.prototype.addTile = function (tile) {
 };
 
 HTMLActuator.prototype.loadSeenMergeValues = function () {
-  try {
-    var raw = window.localStorage.getItem("mergeSeenTiles");
-    if (!raw) return new Set();
-    var parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) return new Set(parsed);
-  } catch (e) {}
+  // Session-only tracking so mobile users see alerts every session
   return new Set();
 };
 
 HTMLActuator.prototype.saveSeenMergeValues = function () {
-  try {
-    window.localStorage.setItem("mergeSeenTiles", JSON.stringify(Array.from(this.seenMergeValues)));
-  } catch (e) {}
+  // no-op (session only)
 };
 
 HTMLActuator.prototype.resetMergeSeenTiles = function () {
   this.seenMergeValues = new Set();
-  try {
-    window.localStorage.removeItem("mergeSeenTiles");
-  } catch (e) {}
 };
 
 HTMLActuator.prototype.ensureMergeToast = function () {
