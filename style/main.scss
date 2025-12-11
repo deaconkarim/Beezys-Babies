@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap");
 @import "helpers";
 @import "fonts/clear-sans.css";
 
@@ -842,5 +843,407 @@ body.howto-open {
     .lower {
       margin-top: 30px !important;
     }
+  }
+}
+
+// ------------------------------------------------------------------
+// Mobile-first native styling layer
+// ------------------------------------------------------------------
+$native-bg-start: #030914;
+$native-bg-end: #101c32;
+$native-card: rgba(12, 19, 34, 0.9);
+$native-panel: rgba(20, 32, 53, 0.65);
+$native-border: rgba(255, 255, 255, 0.08);
+$native-border-strong: rgba(255, 255, 255, 0.2);
+$native-text: #e8f1ff;
+$native-muted: rgba($native-text, 0.7);
+$native-accent: #7ff5b3;
+$native-accent-strong: #5edfff;
+$native-warning: #ffc285;
+
+html, body {
+  background: radial-gradient(circle at top, rgba(94, 223, 255, 0.18), transparent 55%),
+              linear-gradient(160deg, $native-bg-start, $native-bg-end);
+  color: $native-text;
+  font-family: "Outfit", "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 32px 16px 64px;
+  box-sizing: border-box;
+}
+
+.app-shell {
+  width: min(540px, 100%);
+  background: rgba(4, 8, 16, 0.45);
+  border: 1px solid $native-border;
+  border-radius: 32px;
+  padding: 28px 22px 48px;
+  box-shadow: 0 45px 120px rgba(3, 5, 15, 0.75);
+  backdrop-filter: blur(22px);
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  box-sizing: border-box;
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $native-muted;
+}
+
+.status-bar__icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-bar__icon {
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  border-radius: 4px;
+  background: $native-border;
+
+  &.status-bar__icon--wifi {
+    width: 18px;
+    border-radius: 999px;
+  }
+
+  &.status-bar__icon--battery {
+    width: 24px;
+  }
+}
+
+.hero {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.hero__text {
+  flex: 1;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: $native-muted;
+}
+
+h1.title {
+  font-size: clamp(32px, 9vw, 42px);
+  font-weight: 600;
+  margin: 0 0 6px;
+  float: none;
+  display: block;
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 16px;
+  color: $native-muted;
+  line-height: 1.5;
+}
+
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 0;
+  padding: 0 20px;
+  height: 44px;
+  font-weight: 600;
+  background: linear-gradient(120deg, $native-accent, $native-accent-strong);
+  color: $bright-text-color;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(94, 223, 255, 0.25);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 32px rgba(94, 223, 255, 0.35);
+  }
+}
+
+.pill-button--ghost {
+  background: rgba(255, 255, 255, 0.05);
+  color: $native-text;
+  box-shadow: none;
+  border: 1px solid $native-border;
+}
+
+.scores-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+  float: none;
+}
+
+.score-card {
+  padding: 16px 18px;
+  border-radius: 20px;
+  background: $native-card;
+  border: 1px solid $native-border;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+}
+
+.score-card__label {
+  margin: 0;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $native-muted;
+}
+
+.score-container,
+.best-container {
+  background: transparent;
+  padding: 0;
+  height: auto;
+  line-height: 1;
+  font-size: clamp(34px, 10vw, 44px);
+  color: $native-text;
+  margin-top: 0;
+  text-align: left;
+
+  &:after {
+    content: none;
+  }
+}
+
+.score-card__hint {
+  margin: 0;
+  font-size: 12px;
+  color: $native-muted;
+}
+
+.restart-button {
+  float: none;
+  width: 100%;
+}
+
+.game-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.game-device {
+  background: $native-panel;
+  border-radius: 30px;
+  border: 1px solid $native-border;
+  padding: 20px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.game-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.game-intro {
+  margin: 0;
+  line-height: 1.4;
+  float: none;
+}
+
+.game-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.game-pill {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $native-border;
+}
+
+.game-surface {
+  padding: 14px;
+  border-radius: 24px;
+  background: radial-gradient(circle at top, rgba(126, 245, 179, 0.08), transparent 70%),
+              #0b1527;
+  border: 1px solid $native-border;
+}
+
+.game-container {
+  background: rgba(8, 14, 26, 0.65);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.grid-cell {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+}
+
+.tile .tile-inner {
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.session-panel {
+  background: $native-panel;
+  border-radius: 30px;
+  border: 1px solid $native-border;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.session-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.session-card__title {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 13px;
+  color: $native-muted;
+}
+
+.session-card__list {
+  margin: 0;
+  padding-left: 18px;
+  color: $native-text;
+  gap: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.session-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.tile-order-card {
+  background: rgba(4, 8, 16, 0.6);
+  border: 1px solid $native-border;
+  border-radius: 24px;
+  padding: 16px 18px;
+  color: $native-text;
+}
+
+.tile-order-description {
+  color: $native-muted;
+}
+
+.tile-order-actions {
+  justify-content: space-between;
+}
+
+.tile-order-card button {
+  @extend .pill-button;
+  height: 36px;
+  padding: 0 16px;
+  font-size: 13px;
+}
+
+.tile-order-card button:nth-child(2) {
+  @extend .pill-button--ghost;
+}
+
+.tile-order-list {
+  gap: 10px;
+}
+
+.tile-order-chip {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid $native-border;
+  border-radius: 14px;
+}
+
+.game-explanation {
+  margin: 0;
+  color: $native-muted;
+}
+
+.howto-card {
+  background: rgba(7, 12, 24, 0.95);
+  color: $native-text;
+  border-radius: 24px;
+  border: 1px solid $native-border;
+}
+
+.howto-primary {
+  @extend .pill-button;
+}
+
+.howto-secondary {
+  @extend .pill-button;
+  @extend .pill-button--ghost;
+}
+
+.howto-steps {
+  color: $native-text;
+}
+
+@include smaller($mobile-threshold) {
+  body {
+    padding: 18px 12px 32px;
+  }
+
+  .app-shell {
+    padding: 24px 18px 40px;
+    border-radius: 24px;
+  }
+
+  .hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .score-board {
+    grid-template-columns: 1fr;
+  }
+
+  .game-section {
+    gap: 16px;
+  }
+
+  .session-actions {
+    flex-direction: column;
   }
 }
