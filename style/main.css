@@ -1258,3 +1258,13 @@ body.howto-open {
   box-shadow: 0 0 0 3px rgba(102, 187, 106, 0.35), 0 12px 32px rgba(46, 125, 50, 0.25);
   transition: box-shadow 200ms ease;
 }
+.game-container.win-celebrate {
+  box-shadow: 0 0 0 4px rgba(255, 215, 64, 0.5), 0 18px 38px rgba(255, 215, 64, 0.3);
+  animation: win-pop 500ms ease;
+}
+
+@keyframes win-pop {
+  0% { transform: scale(0.98); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}

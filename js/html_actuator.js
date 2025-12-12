@@ -54,6 +54,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
         self.message(false); // You lose
       } else if (metadata.won) {
         self.message(true); // You win!
+        self.winCelebrate();
       }
     }
 
@@ -169,7 +170,7 @@ HTMLActuator.prototype.updateProgress = function (maxTile) {
     512: "Ty",
     1024: "Joey",
     2048: "BG",
-    4096: "Beezy's Babies"
+    4096: "Beezy"
   };
   var imgKey = (window.tileImageMap && window.tileImageMap[maxTile]) || maxTile;
   var nameMap = window.tileNames || defaultNames;
@@ -350,6 +351,25 @@ HTMLActuator.prototype.setReactionFace = function (key) {
   this.reactionFace.style.backgroundImage = 'url("images/' + file + '")';
   this.reactionFace.style.backgroundPosition = "center";
   this.reactionFace.style.backgroundSize = "contain";
+};
+
+HTMLActuator.prototype.winCelebrate = function () {
+  if (!this.boardContainer) return;
+  var self = this;
+  this.boardContainer.classList.add("win-celebrate");
+  this.spawnConfetti(4096);
+  setTimeout(function () { self.spawnConfetti(4096); }, 200);
+
+  // Force a celebratory reaction
+  this.setReactionFace("party");
+  if (this.reactionText) {
+    this.reactionText.textContent = "Beezy is ecstatic!";
+  }
+
+  clearTimeout(this.winTimer);
+  this.winTimer = setTimeout(function () {
+    self.boardContainer.classList.remove("win-celebrate");
+  }, 1600);
 };
 
 HTMLActuator.prototype.triggerDelight = function () {
